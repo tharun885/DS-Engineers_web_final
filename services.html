@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - DS Engineers</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#ffffff', darkgray: '#f3f4f6', orange: '#ff7a00' },
+                    fontFamily: { heading: ['Bebas Neue', 'sans-serif'], body: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mega-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .counter-num {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .chat-bubble {
+            animation: bounceIn 0.3s ease;
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .typing-dot {
+            animation: typingBounce 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingBounce {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* ── Service cards ── */
+        .service-card {
+            overflow: hidden;
+        }
+
+        .service-card .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .card-img {
+            transform: scale(1.08);
+        }
+
+        .service-card .img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover .img-overlay {
+            opacity: 1;
+        }
+
+        .float-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .header-solid {
+            background: #ffffff !important;
+            backdrop-filter: none !important;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff7a00;
+            border-radius: 4px;
+        }
+
+        .page-header {
+            padding-top: 180px;
+            padding-bottom: 80px;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-gray-900 font-body h-full overflow-auto">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+        style="background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); box-shadow: 0 1px 8px rgba(0,0,0,0.06);">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="ds_images/logo/ds-logo.png" alt="DS Engineers Logo" class="h-12 w-12 object-contain">
+
+                <div class="leading-tight">
+                    <div class="text-[10px] font-semibold text-gray-500 uppercase">
+                        DS Group's
+                    </div>
+
+                    <div class="font-heading text-2xl tracking-wider text-[#2D2B7F] leading-none">
+                        DS ENGINEERS
+                    </div>
+
+                    <div class="text-[9px] text-gray-500">
+                        ISO 9001:2015 Certified Company
+                    </div>
+                </div>
+            </a>
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700">
+                <a href="index.html" class="hover:text-orange transition">Home</a>
+                <a href="about.html" class="hover:text-orange transition">About Us</a>
+                <div class="nav-item relative">
+                    <a href="services.html" class="text-orange transition flex items-center gap-1">
+                        Services <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </a>
+                    <div
+                        class="mega-menu absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-white border border-gray-200 shadow-lg rounded-xl p-6 w-[500px] grid grid-cols-2 gap-3">
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Structural
+                            Fabrication</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Steel
+                            Fabrication</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Aluminium
+                            Fabrication</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Industrial
+                            Maintenance</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Plant
+                            Installation</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Engineering
+                            Consulting</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Custom
+                            Fabrication</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Machine
+                            Structures</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Pipeline
+                            Works</a>
+                        <a href="services.html"
+                            class="px-3 py-2 rounded hover:bg-orange/10 hover:text-orange transition text-sm text-gray-700">Heavy
+                            Fabrication</a>
+                    </div>
+                </div>
+                <a href="industries.html" class="hover:text-orange transition">Industries</a>
+                <a href="projects.html" class="hover:text-orange transition">Projects</a>
+                <a href="gallery.html" class="hover:text-orange transition">Gallery</a>
+                <a href="contact.html" class="hover:text-orange transition">Contact</a>
+
+            </nav>
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="tel:+1234567890"
+                    class="border border-orange text-orange px-4 py-2 rounded-full text-sm font-semibold hover:bg-orange hover:text-white transition">Call
+                    Us</a>
+                <a href="contact.html"
+                    class="bg-orange text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-orange/90 transition">Get
+                    Quote</a>
+            </div>
+            <button id="mobileMenuBtn" class="lg:hidden text-gray-900"><i data-lucide="menu"
+                    class="w-6 h-6"></i></button>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-gray-200 px-6 py-4">
+            <div class="flex flex-col gap-3 text-sm text-gray-700">
+                <a href="index.html" class="py-2 hover:text-orange">Home</a>
+                <a href="about.html" class="py-2 hover:text-orange">About Us</a>
+                <a href="services.html" class="py-2 text-orange">Services</a>
+                <a href="industries.html" class="py-2 hover:text-orange">Industries</a>
+                <a href="projects.html" class="py-2 hover:text-orange">Projects</a>
+                <a href="gallery.html" class="py-2 hover:text-orange">Gallery</a>
+                <a href="contact.html" class="py-2 hover:text-orange">Contact</a>
+                <a href="contact.html"
+                    class="bg-orange text-white px-4 py-2 rounded-full text-sm font-bold text-center mt-2">Get Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="max-w-7xl mx-auto px-6 text-center fade-up">
+            <span class="text-orange text-sm font-semibold tracking-wider uppercase">What We Do</span>
+            <h1 class="font-heading text-6xl md:text-8xl mt-3 text-gray-900">OUR SERVICES</h1>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Comprehensive engineering and fabrication solutions tailored
+                to your industrial needs.</p>
+        </div>
+    </section>
+
+    <!-- All Services -->
+    <section class="py-24 bg-gray-50 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. Structural Fabrication -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/structural-fabrication.mp4" type="video/mp4">
+
+                        </video>
+                        <!-- Fallback icon -->
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center hidden"
+                            style="display:none">
+                            <i data-lucide="building-2" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">STRUCTURAL FABRICATION</h3>
+                        <p class="text-gray-500 text-sm mb-4">Heavy structural steel fabrication for industrial
+                            buildings, warehouses, and plant structures.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 2. Steel Fabrication -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/steel-fabrication.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="layers" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">STEEL FABRICATION</h3>
+                        <p class="text-gray-500 text-sm mb-4">Precision steel fabrication with cutting, welding, and
+                            assembly for diverse applications.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 3. Aluminium Fabrication -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/aluminium-fabrication.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="hexagon" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">ALUMINIUM FABRICATION</h3>
+                        <p class="text-gray-500 text-sm mb-4">Lightweight aluminium structures and components for
+                            specialized industrial requirements.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 4. Industrial Maintenance -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/industrial-maintenance.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="wrench" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">INDUSTRIAL MAINTENANCE</h3>
+                        <p class="text-gray-500 text-sm mb-4">Planned and preventive maintenance services to maximize
+                            plant uptime and efficiency.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 5. Industrial Installation -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/industrial-installation.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="hard-hat" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">INDUSTRIAL INSTALLATION</h3>
+                        <p class="text-gray-500 text-sm mb-4">Complete plant installation, equipment erection, and
+                            commissioning services.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 6. Heavy Engineering -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/heavy-engineering.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="settings" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">HEAVY ENGINEERING</h3>
+                        <p class="text-gray-500 text-sm mb-4">Complex heavy engineering projects including pressure
+                            vessels, tanks, and custom machinery.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 7. Engineering Consulting -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/engineering-consulting.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="briefcase" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">ENGINEERING CONSULTING</h3>
+                        <p class="text-gray-500 text-sm mb-4">Expert engineering consulting services to optimize your
+                            industrial projects from concept to completion.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 8. Custom Fabrication -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/custom-fabrication.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="hammer" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">CUSTOM FABRICATION</h3>
+                        <p class="text-gray-500 text-sm mb-4">Tailored custom fabrication solutions to meet unique
+                            industrial specifications and requirements.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 9. Machine Structures -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/machine-structures.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="cpu" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">MACHINE STRUCTURES</h3>
+                        <p class="text-gray-500 text-sm mb-4">Robust machine structures, frames, and bases engineered
+                            for industrial machinery and equipment.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+                <!-- 10. Pipeline Works -->
+                <div
+                    class="service-card group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-orange/50 transition-all duration-500 fade-up shadow-sm">
+                    <div class="relative h-52 overflow-hidden">
+                        <video class="card-img w-full h-full object-cover" autoplay muted loop playsinline>
+
+                            <source src="ds_images/services/pipeline-works.mp4" type="video/mp4">
+
+                        </video>
+                        <div class="w-full h-full bg-gradient-to-br from-orange/10 to-gray-100 items-center justify-center"
+                            style="display:none">
+                            <i data-lucide="pipette" class="w-16 h-16 text-orange/40"></i>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-2xl mb-2 text-gray-900">PIPELINE WORKS</h3>
+                        <p class="text-gray-500 text-sm mb-4">Professional pipeline fabrication, installation, and
+                            maintenance for industrial fluid systems.</p>
+                        <a href="contact.html"
+                            class="text-orange text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Learn
+                            More <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-20 bg-white relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-orange/5 via-transparent to-orange/5"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+                <div class="fade-up">
+                    <div class="font-heading text-5xl text-orange counter-num" data-target="20">0</div>
+                    <div class="text-gray-500 text-sm mt-2">Years Experience</div>
+                </div>
+                <div class="fade-up">
+                    <div class="font-heading text-5xl text-orange counter-num" data-target="500">0</div>
+                    <div class="text-gray-500 text-sm mt-2">Projects</div>
+                </div>
+                <div class="fade-up">
+                    <div class="font-heading text-5xl text-orange counter-num" data-target="100">0</div>
+                    <div class="text-gray-500 text-sm mt-2">Clients</div>
+                </div>
+                <div class="fade-up">
+                    <div class="font-heading text-5xl text-orange counter-num" data-target="50">0</div>
+                    <div class="text-gray-500 text-sm mt-2">Engineers</div>
+                </div>
+                <div class="fade-up">
+                    <div class="font-heading text-5xl text-orange counter-num" data-target="98">0</div>
+                    <div class="text-gray-500 text-sm mt-2">Satisfaction %</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 fade-up">
+            <h2 class="font-heading text-5xl md:text-7xl mb-6 text-gray-900">READY TO START YOUR PROJECT?</h2>
+            <p class="text-gray-500 text-lg mb-10 max-w-2xl mx-auto">Get a custom quote tailored to your specific
+                industrial engineering needs.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="contact.html"
+                    class="bg-orange text-white px-10 py-4 rounded-full font-bold hover:bg-orange/90 transition flex items-center gap-2">Get
+                    Quote <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                <a href="projects.html"
+                    class="border border-gray-300 text-gray-700 px-10 py-4 rounded-full font-semibold hover:border-orange hover:text-orange transition">View
+                    Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer — stays dark -->
+    <footer class="relative overflow-hidden pt-20 pb-8">
+        <!-- Footer Background Image -->
+        <img src="ds_images/services/fotter_image.jpg" alt="Footer Background"
+            class="absolute inset-0 w-full h-full object-cover">
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/25"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="ds_images/logo/ds-logo.png" alt="DS Engineers Logo" class="h-12 w-12 object-contain">
+                        <div class="leading-tight">
+                            <div class="text-[10px] font-bold uppercase text-gray-200 tracking-wide">DS GROUP'S
+                            </div>
+                            <div class="text-[32px] font-[900] text-orange leading-none">DS ENGINEERS</div>
+                            <div class="text-[9px] font-semibold text-gray-500">An ISO 9001 : 2015 Certified Company
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-200 text-sm leading-relaxed mb-4">Premium industrial engineering and
+                        fabrication
+                        solutions for over 20 years.</p>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-9 h-9 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-orange transition text-gray-200 hover:text-white"><i
+                                data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-orange transition text-gray-200 hover:text-white"><i
+                                data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-orange transition text-gray-200 hover:text-white"><i
+                                data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-orange transition text-gray-200 hover:text-white"><i
+                                data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg mb-4 text-white">QUICK LINKS</h4>
+                    <ul class="space-y-2 text-sm text-gray-200">
+                        <li><a href="index.html" class="hover:text-orange transition">Home</a></li>
+                        <li><a href="about.html" class="hover:text-orange transition">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-orange transition">Services</a></li>
+                        <li><a href="projects.html" class="hover:text-orange transition">Projects</a></li>
+                        <li><a href="contact.html" class="hover:text-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg mb-4 text-white">SERVICES</h4>
+                    <ul class="space-y-2 text-sm text-gray-200">
+                        <li><a href="services.html" class="hover:text-orange transition">Structural Fabrication</a>
+                        </li>
+                        <li><a href="services.html" class="hover:text-orange transition">Steel Fabrication</a></li>
+                        <li><a href="services.html" class="hover:text-orange transition">Industrial Maintenance</a>
+                        </li>
+                        <li><a href="services.html" class="hover:text-orange transition">Plant Installation</a></li>
+                        <li><a href="services.html" class="hover:text-orange transition">Pipeline Works</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg mb-4 text-white">CONTACT</h4>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3"><i data-lucide="map-pin"
+                                class="w-4 h-4 text-orange mt-0.5 flex-shrink-0"></i> Mahamati, Dena Bank Colony,
+                            Savedi, Ahmednagar -414 003, M.S. (India).</li>
+                        <li class="flex items-center gap-3"><i data-lucide="phone"
+                                class="w-4 h-4 text-orange flex-shrink-0"></i>+91 98603 44304</li>
+                        <li class="flex items-center gap-3"><i data-lucide="mail"
+                                class="w-4 h-4 text-orange flex-shrink-0"></i>info@dsengrs.com</li>
+                        <li class="flex items-start gap-3"><i data-lucide="clock"
+                                class="w-4 h-4 text-orange mt-0.5 flex-shrink-0"></i>Mon - Sat: 8:00 AM - 6:00 PM
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-200 text-sm">© 2024 DS Engineers. All
+                Rights
+                Reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Buttons -->
+    <div class="fixed right-4 bottom-24 z-40 flex flex-col gap-3">
+        <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer"
+            class="float-btn w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg transition-all duration-300">
+            <i data-lucide="message-circle" class="w-5 h-5 text-white"></i>
+        </a>
+        <a href="tel:+1234567890"
+            class="float-btn w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg transition-all duration-300">
+            <i data-lucide="phone" class="w-5 h-5 text-white"></i>
+        </a>
+        <a href="mailto:info@dsengrs.com"
+            class="float-btn w-12 h-12 bg-orange rounded-full flex items-center justify-center shadow-lg transition-all duration-300">
+            <i data-lucide="mail" class="w-5 h-5 text-white"></i>
+        </a>
+    </div>
+
+    <!-- AI Chat Widget -->
+    <div id="chatWidget" class="fixed bottom-4 right-4 z-50">
+        <button id="chatToggle"
+            class="w-14 h-14 bg-orange rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+            <i data-lucide="message-square" class="w-6 h-6 text-white"></i>
+        </button>
+        <div id="chatBox"
+            class="hidden absolute bottom-16 right-0 w-80 bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="bg-gray-900 p-4 flex items-center justify-between border-b border-gray-700">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-orange rounded-full flex items-center justify-center">
+                        <span class="font-heading text-white text-xs">DS</span>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm text-white">DS Engineers AI</div>
+                        <div class="text-green-400 text-xs flex items-center gap-1"><span
+                                class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>Online</div>
+                    </div>
+                </div>
+                <button id="chatClose" class="text-gray-400 hover:text-white"><i data-lucide="x"
+                        class="w-4 h-4"></i></button>
+            </div>
+            <div id="chatMessages" class="h-64 overflow-y-auto p-4 space-y-3 bg-gray-50">
+                <div
+                    class="chat-bubble bg-white border border-gray-200 rounded-xl rounded-bl-none p-3 max-w-[85%] shadow-sm">
+                    <p class="text-sm text-gray-700">Welcome to DS Engineers! How can I assist you today?</p>
+                </div>
+            </div>
+            <div class="p-3 border-t border-gray-200 bg-white">
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <button
+                        class="quick-q text-xs bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-600 hover:border-orange hover:text-orange transition">Our
+                        Services</button>
+                    <button
+                        class="quick-q text-xs bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-600 hover:border-orange hover:text-orange transition">Get
+                        a Quote</button>
+                    <button
+                        class="quick-q text-xs bg-gray-100 border border-gray-200 rounded-full px-3 py-1 text-gray-600 hover:border-orange hover:text-orange transition">Contact
+                        Us</button>
+                </div>
+                <div class="flex gap-2">
+                    <input id="chatInput" type="text" placeholder="Type a message..."
+                        class="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm text-gray-900 outline-none focus:border-orange transition">
+                    <button id="chatSend"
+                        class="w-9 h-9 bg-orange rounded-full flex items-center justify-center hover:bg-orange/90 transition">
+                        <i data-lucide="send" class="w-4 h-4 text-white"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 80) header.classList.add('header-solid');
+            else header.classList.remove('header-solid');
+        });
+
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        function animateCounters() {
+            document.querySelectorAll('.counter-num').forEach(el => {
+                const target = parseInt(el.dataset.target);
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    el.textContent = Math.floor(current) + '+';
+                }, 30);
+            });
+        }
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { animateCounters(); counterObserver.disconnect(); } });
+        }, { threshold: 0.3 });
+        const firstCounter = document.querySelector('.counter-num');
+        if (firstCounter) counterObserver.observe(firstCounter);
+
+        // Chat widget
+        const chatToggle = document.getElementById('chatToggle');
+        const chatBox = document.getElementById('chatBox');
+        const chatClose = document.getElementById('chatClose');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        const chatMessages = document.getElementById('chatMessages');
+
+        chatToggle.addEventListener('click', () => chatBox.classList.toggle('hidden'));
+        chatClose.addEventListener('click', () => chatBox.classList.add('hidden'));
+
+        const responses = {
+            'our services': 'We offer Structural Fabrication, Steel & Aluminium Fabrication, Industrial Maintenance, Plant Installation, Pipeline Works, and Heavy Engineering. Would you like details on any specific service?',
+            'get a quote': "I'd be happy to help you get a quote! Please share your project requirements — type of work, approximate scope, and timeline — and our team will prepare a detailed estimate.",
+            'contact us': 'You can reach us at:\n📞 +91 98603 44304\n✉️ info@dsengrs.com\n📍 Industrial Area, Phase 2\n⏰ Mon-Sat: 8AM - 6PM'
+        };
+
+        function addMessage(text, isUser) {
+            const div = document.createElement('div');
+            div.className = `chat-bubble ${isUser
+                ? 'bg-orange/10 border border-orange/20 rounded-xl rounded-br-none ml-auto'
+                : 'bg-white border border-gray-200 rounded-xl rounded-bl-none shadow-sm'} p-3 max-w-[85%]`;
+            div.innerHTML = `<p class="text-sm ${isUser ? 'text-orange' : 'text-gray-700'}">${text.replace(/\n/g, '<br>')}</p>`;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.id = 'typing';
+            div.className = 'chat-bubble bg-white border border-gray-200 rounded-xl rounded-bl-none p-3 max-w-[85%] flex gap-1 shadow-sm';
+            div.innerHTML = '<span class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></span><span class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></span><span class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></span>';
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage(text) {
+            if (!text.trim()) return;
+            addMessage(text, true);
+            chatInput.value = '';
+            showTyping();
+            setTimeout(() => {
+                const t = document.getElementById('typing'); if (t) t.remove();
+                const key = text.toLowerCase().trim();
+                const reply = responses[key] || "Thank you for your message! Our team will get back to you shortly. In the meantime, feel free to ask about our services, request a quote, or get our contact details.";
+                addMessage(reply, false);
+            }, 1200);
+        }
+
+        chatSend.addEventListener('click', () => sendMessage(chatInput.value));
+        chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); sendMessage(chatInput.value); } });
+        document.querySelectorAll('.quick-q').forEach(btn => {
+            btn.addEventListener('click', () => sendMessage(btn.textContent));
+        });
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
